@@ -1,0 +1,71 @@
+{
+  "expo": {
+    "name": "tutiendaverllmm",
+    "slug": "tutiendaverllmm",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logoplm.png",
+    "scheme": "tutiendaverllmm",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "icon": "./assets/expo.icon"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/logoplm.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "tutiendaverllmm",
+              "host": "paginaslm.cl",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
+      "package": "cl.paginaslm.tutiendaver"
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/logoplm.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#208AEF",
+          "image": "./assets/images/logoplm.png",
+          "imageWidth": 76
+        }
+      ],
+      "expo-image",
+      "expo-secure-store",
+      "expo-sharing",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "48d7ca70-be3f-4226-90b6-fff8973bc103"
+      }
+    },
+    "owner": "lucholalo"
+  }
+}
