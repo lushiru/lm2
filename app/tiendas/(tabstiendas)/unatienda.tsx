@@ -197,12 +197,6 @@ export default function Unatienda() {
                                     color={esFavorito ? "#ff3b30" : "#000000"}
                                 />
                             </Pressable>
-
-                            <Pressable
-                                onPress={() => { setPage(1) }}
-                            >
-                                <Text>Reload</Text>
-                            </Pressable>
                         </View>)
                         : (
                             <Text>No hay tienda</Text>
@@ -344,8 +338,6 @@ const styles = StyleSheet.create({
     item: {
         padding: 20,
         fontSize: 18,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
     },
     imagen: {
         width: 300,
@@ -380,7 +372,7 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
         elevation: 3, // Sombra para Android
         overflow: 'hidden',
-        height: 700,
+        height: 600,
     },
     contenido: {
         padding: 20,
@@ -438,23 +430,27 @@ const styles = StyleSheet.create({
     },
 
     pagination: {
-        width: 30,
+        width: 40,
+        height: 40,
+        borderRadius: 8, // ✨ Bordes suavizados modernos
+        backgroundColor: '#FFFFFF', // Fondo limpio para los botones inactivos
+        justifyContent: 'center',
+        alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#1a1818ff',
-        paddingLeft: 5,
-        paddingRight: 5,
-        fontWeight: "bold",
+        borderColor: '#E0E0E0', // Borde sutil y claro en lugar de negro rígido
+        // Sombra ligera para dar volumen táctil
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.05,
+        shadowRadius: 2,
+        elevation: 1,
+        marginLeft: 10,
+        marginRight: 10,
     },
 
     btnpag: {
-        width: 25,
-        height: 25,
-        backgroundColor: "#c0d392ff",
-        borderRadius: 5,
-        justifyContent: "center",
-        alignItems: "center",
-        alignSelf: "center",
-        textAlign: "center",
-        margin: 2,
+        fontSize: 15,
+        fontWeight: '500',
+        color: '#555555',
     },
 });

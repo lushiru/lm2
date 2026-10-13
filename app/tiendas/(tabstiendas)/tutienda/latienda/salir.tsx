@@ -7,7 +7,6 @@ export default function Salir() {
         <View
             style={styles.container}
         >
-            <Text>app de salir.</Text>
             <Button title="Sign Out" onPress={signOut} />
         </View>
     );

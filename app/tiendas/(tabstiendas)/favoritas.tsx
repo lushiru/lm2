@@ -45,47 +45,52 @@ export default function Favoritas() {
 
 
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.containerScroll}>
             <Text style={styles.title}>Tiendas favoritas</Text>
             {favoritos && favoritos.map((item, index) => (
                 <View key={index} style={styles.container}>
-                    <Pressable
+                    <View style={styles.headerRow}>
+                        <Pressable
 
-                        onPress={() => {
-                            router.replace({
-                                pathname: "/tiendas/(tabstiendas)/unatienda",
-                                params: {
-                                    id: item.idtienda,
-                                    iduser: item.iduser,
-                                    nombretienda: item.nombretienda,
-                                    telefono: item.telefono,
-                                    correo: item.correo,
-                                    direccion: item.direccion,
-                                    logo: item.logo,
-                                },
-                            });
-                        }}
-                    >
-                        <Text style={styles.itemnombre}>{item.nombretienda}</Text>
-                    </Pressable>
-                    <Pressable
-                        onPress={() => alternarFavorito(item.iduser)}
-                    >
-                        <Ionicons
-                            name="heart"
-                            size={24}
-                            color="#ff3b30"
+                            onPress={() => {
+                                router.replace({
+                                    pathname: "/tiendas/(tabstiendas)/unatienda",
+                                    params: {
+                                        id: item.idtienda,
+                                        iduser: item.iduser,
+                                        nombretienda: item.nombretienda,
+                                        telefono: item.telefono,
+                                        correo: item.correo,
+                                        direccion: item.direccion,
+                                        logo: item.logo,
+                                    },
+                                });
+                            }}
+                        >
+                            <Text style={styles.itemnombre}>{item.nombretienda}</Text>
+                        </Pressable>
+                        <Pressable
+                            onPress={() => alternarFavorito(item.iduser)}
+                        >
+                            <Ionicons
+                                name="heart"
+                                size={24}
+                                color="#ff3b30"
+                            />
+                        </Pressable>
+                    </View>
+                    <View style={styles.card}>
+                        <Image
+                            source={{ uri: `${process.env.EXPO_PUBLIC_PAGINA}uploads/${item.iduser}/${item.logo}` }}
+                            style={styles.image}
+                            cachePolicy="disk"
                         />
-                    </Pressable>
-                    <Image
-                        source={{ uri: `${process.env.EXPO_PUBLIC_PAGINA}uploads/${item.iduser}/${item.logo}` }}
-                        style={styles.imagen}
-                        cachePolicy="disk"
-                    />
-                    <Text style={styles.item2}>telefono: {item.telefono}</Text>
-                    <Text style={styles.item2}>correo: {item.correo}</Text>
-                    <Text style={styles.item2}>direccion: {item.direccion}</Text>
-
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.item2}>telefono: {item.telefono}</Text>
+                            <Text style={styles.item2}>correo: {item.correo}</Text>
+                            <Text style={styles.item2}>direccion: {item.direccion}</Text>
+                        </View>
+                    </View>
                 </View>
             ))}
         </ScrollView>
@@ -93,11 +98,41 @@ export default function Favoritas() {
 }
 
 const styles = StyleSheet.create({
+    containerScroll: {
+        padding: 10,
+        backgroundColor: "#F8F9FA",
+        paddingBottom: 40,
+    },
     container: {
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 10,
-        padding: 20,
+        flex: 1,
+        // Aprovecha el color gris claro de fondo que configuramos globalmente en el paso anterior
+        paddingHorizontal: 16,
+    },
+    card: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 16,
+        flexDirection: 'row', // Foto a la izquierda, textos a la derecha
+        padding: 12,
+        marginBottom: 16,
+        position: 'relative',
+        // Sombras nativas para dar profundidad limpia
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.06,
+        shadowRadius: 8,
+        elevation: 3,
+    },
+    image: {
+        width: 50,
+        height: 50,
+        borderRadius: 12,
+        backgroundColor: '#F0F0F0',
+    },
+    infoContainer: {
+        flex: 1, // Obliga al contenedor a ocupar el espacio restante sin empujar el diseño
+        marginLeft: 14,
+        justifyContent: 'center',
+        paddingRight: 24, // Deja espacio libre para que el texto no choque con el corazón
     },
     title: {
         fontSize: 24,
@@ -137,5 +172,11 @@ const styles = StyleSheet.create({
     },
     boton: {
         padding: 10,
+    },
+    headerRow: {
+        flexDirection: 'row',       // ✨ Alinea nombre y corazón en la misma línea
+        justifyContent: 'space-between', // ✨ Envía el nombre a la izquierda y el corazón a la derecha
+        alignItems: 'center',       // Centra verticalmente ambos elementos
+        marginBottom: 14,           // Separa esta fila del contenido de abajo
     },
 });

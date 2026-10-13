@@ -108,7 +108,7 @@ export default function Generarqr() {
                 />
                 <Text style={styles.subTextoQr}>Escanea para visitarnos</Text>
             </View>
-            <Button title="Compartir Imagen QR 2" onPress={compartirQRConTexto} />
+            <Button title="Compartir Imagen QR 1" onPress={compartirQRConTexto} />
             <View style={styles.separator} />
             <View
                 ref={viewRef2}

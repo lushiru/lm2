@@ -108,62 +108,75 @@ export default function Producto() {
 
 
     return (
-        <View>
-            <SafeAreaView>
-                <Text>Productos</Text>
-                <Button title="Crear" onPress={() => router.push("./crear")} />
-                <View style={{ height: 10 }} />
-                <View style={styles.tableContainer}>
-                    <ScrollView horizontal={true}>
-                        <View>
-                            <View style={styles.headerRow}>
-                                <Text style={styles.headerCell1}>id</Text>
-                                <Text style={styles.headerCell2}>nombre</Text>
-                                <Text style={styles.headerCell3}>precio</Text>
-                                <Text style={styles.headerCell4}>cantidad</Text>
-                                <Text style={styles.headerCell5}>Editar</Text>
-                                <Text style={styles.headerCell6}>Imagen</Text>
-                                <Text style={styles.headerCell7}>Eliminar</Text>
-                            </View>
-                            {productos && productos.map((producto, index) => (
-                                <View style={styles.dataRow} key={index}>
-                                    <Text style={styles.dataCell1}>{producto.id}</Text>
-                                    <Text style={styles.dataCell2}>{producto.nombre}</Text>
-                                    <Text style={styles.dataCell3}>{producto.precio}</Text>
-                                    <Text style={styles.dataCell4}>{producto.cantidad}</Text>
-                                    <View style={styles.dataCell5}><Pressable style={styles.btn} onPress={() => router.replace({ pathname: "./editar", params: { id: producto.id.toString() != "" ? producto.id : "0" } })} ><Text>Editar</Text></Pressable></View>
-                                    <View style={styles.dataCell6}><Pressable style={styles.btn} onPress={() => router.replace({
-                                        pathname: "./imagenes",
-                                        params: {
-                                            id: producto.id.toString() != "" ? producto.id : "0",
-                                            nombreimagen1: producto.imagen1 != "" ? producto.imagen1 : "sinfoto.jpeg",
-                                            nombreimagen2: producto.imagen2 != "" ? producto.imagen2 : "sinfoto.jpeg",
-                                            nombreimagen3: producto.imagen3 != "" ? producto.imagen3 : "sinfoto.jpeg",
-                                        }
-                                    })} ><Text>Imagen</Text></Pressable></View>
-                                    <View style={styles.dataCell7}><Pressable style={styles.btn} onPress={() => eliminar(producto.id)} ><Text>Eliminar</Text></Pressable></View>
-                                </View>
-                            ))}
+        <ScrollView
+            style={styles.container}
+            contentContainerStyle={styles.scrollVerticalContainer}
+            showsVerticalScrollIndicator={true}
+        >
+            <Text>Productos</Text>
+            <Button title="Crear" onPress={() => router.push("./crear")} />
+            <View style={{ height: 10 }} />
+            <View style={styles.tableContainer}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <View>
+                        <View style={styles.headerRow}>
+                            <Text style={styles.headerCell1}>id</Text>
+                            <Text style={styles.headerCell2}>nombre</Text>
+                            <Text style={styles.headerCell3}>precio</Text>
+                            <Text style={styles.headerCell4}>cantidad</Text>
+                            <Text style={styles.headerCell5}>Editar</Text>
+                            <Text style={styles.headerCell6}>Imagen</Text>
+                            <Text style={styles.headerCell7}>Eliminar</Text>
                         </View>
-                    </ScrollView>
-                </View>
-                <View style={{ height: 10 }} />
-                <View style={styles.viewpagination}>
-                    {links ?
-                        <>
-                            {links?.first_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.first_page_url}`)} ><Text style={styles.btnpag}>{`<<`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`<<`}</Text></View>}
-                            {links?.prev_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.prev_page_url}`)} ><Text style={styles.btnpag}>{`<`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`<`}</Text></View>}
-                            <View style={styles.pagination}><Text style={styles.btnpag}>{currentPage}</Text></View>
-                            {links?.next_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.next_page_url}`)} ><Text style={styles.btnpag}>{`>`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`>`}</Text></View>}
-                            {links?.last_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.last_page_url}`)} ><Text style={styles.btnpag}>{`>>`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`>>`}</Text></View>}
-                        </> : <Text>...</Text>}
-                </View>
-            </SafeAreaView>
-        </View>
+                        {productos && productos.map((producto, index) => (
+                            <View style={styles.dataRow} key={index}>
+                                <Text style={styles.dataCell1}>{producto.id}</Text>
+                                <Text style={styles.dataCell2}>{producto.nombre}</Text>
+                                <Text style={styles.dataCell3}>{producto.precio}</Text>
+                                <Text style={styles.dataCell4}>{producto.cantidad}</Text>
+                                <View style={styles.dataCell5}><Pressable style={styles.btn} onPress={() => router.replace({ pathname: "./editar", params: { id: producto.id.toString() != "" ? producto.id : "0" } })} ><Text>Editar</Text></Pressable></View>
+                                <View style={styles.dataCell6}><Pressable style={styles.btn} onPress={() => router.replace({
+                                    pathname: "./imagenes",
+                                    params: {
+                                        id: producto.id.toString() != "" ? producto.id : "0",
+                                        nombreimagen1: producto.imagen1 != "" ? producto.imagen1 : "sinfoto.jpeg",
+                                        nombreimagen2: producto.imagen2 != "" ? producto.imagen2 : "sinfoto.jpeg",
+                                        nombreimagen3: producto.imagen3 != "" ? producto.imagen3 : "sinfoto.jpeg",
+                                    }
+                                })} ><Text>Imagen</Text></Pressable></View>
+                                <View style={styles.dataCell7}><Pressable style={styles.btn} onPress={() => eliminar(producto.id)} ><Text>Eliminar</Text></Pressable></View>
+                            </View>
+                        ))}
+                    </View>
+                </ScrollView>
+            </View>
+            <View style={{ height: 10 }} />
+            <View style={styles.viewpagination}>
+                {links ?
+                    <>
+                        {links?.first_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.first_page_url}`)} ><Text style={styles.btnpag}>{`<<`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`<<`}</Text></View>}
+                        {links?.prev_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.prev_page_url}`)} ><Text style={styles.btnpag}>{`<`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`<`}</Text></View>}
+                        <View style={styles.pagination}><Text style={styles.btnpag}>{currentPage}</Text></View>
+                        {links?.next_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.next_page_url}`)} ><Text style={styles.btnpag}>{`>`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`>`}</Text></View>}
+                        {links?.last_page_url ? <View style={styles.pagination}><Pressable onPress={() => setPaginaver(`${links.last_page_url}`)} ><Text style={styles.btnpag}>{`>>`}</Text></Pressable></View> : <View style={styles.pagination}><Text style={styles.btnpag}>{`>>`}</Text></View>}
+                    </> : <Text>...</Text>}
+            </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        backgroundColor: '#F8F9FA', // El fondo gris moderno que configuramos
+    },
+    scrollVerticalContainer: {
+        flexGrow: 1,
+        paddingHorizontal: 16,
+        paddingTop: 10,
+        paddingBottom: 40, // ✨ Muy importante: da un espacio extra abajo para que la paginación respire
+    },
 
     viewpagination: {
         flexDirection: "row",

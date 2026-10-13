@@ -1,9 +1,10 @@
 
 import { buscarTienda } from "@/api/tienda";
+import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, View } from "react-native";
+import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from "react-native";
 import * as Yup from "yup";
 
 export function initialValues() {
@@ -80,18 +81,22 @@ export default function Buscar() {
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.title}>Encuentra tu tienda</Text>
-
-                <TextInput
-                    style={styles.input}
-                    placeholder="Nombre de la tienda"
-                    value={formik.values.nombretienda}
-                    onChangeText={(text) => formik.setFieldValue("nombretienda", text)}
-                    keyboardType="default"
-                />
+                <View style={styles.searchContainer}>
+                    <Ionicons name="search-outline" size={20} color="#888" style={styles.searchIcon} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Nombre de la tienda"
+                        value={formik.values.nombretienda}
+                        onChangeText={(text) => formik.setFieldValue("nombretienda", text)}
+                        keyboardType="default"
+                    />
+                </View>
                 {formik.touched.nombretienda && formik.errors.nombretienda ? (
                     <Text>{formik.errors.nombretienda}</Text>
                 ) : null}
-                <Button title="Buscar tienda" disabled={formik.isSubmitting} onPress={() => formik.handleSubmit()} color="#e74b1cff" />
+                <TouchableOpacity style={styles.buttonBuscar} activeOpacity={0.8} onPress={() => formik.handleSubmit()} disabled={formik.isSubmitting}>
+                    <Text style={styles.buttonText}>Buscar Tienda</Text>
+                </TouchableOpacity>
                 <View style={{ height: 30 }} />
                 {!loading ? (
                     <Text>Busca tu tienda... </Text>
@@ -103,7 +108,7 @@ export default function Buscar() {
                             >
                                 <Text style={styles.link}>{item.nombretienda}</Text>
                             </Pressable>
-                            <View style={{ height: 10 }} />
+                            <View style={{ height: 20 }} />
                         </View>
                     ))
                 )}
@@ -117,6 +122,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 20,
+        backgroundColor: '#F8F9FA',
     },
     title: {
         fontSize: 20,
@@ -125,16 +131,48 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingTop: 40,
     },
-    input: {
-        height: 40,
-        borderColor: 'gray',
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 12,
         borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
+        borderColor: '#E0E0E0',
+        paddingHorizontal: 14,
+        height: 50,
+        marginBottom: 14,
+        // Sombra sutil para iOS
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+        // Sombra sutil para Android
+        elevation: 2,
+    },
+    searchIcon: {
+        marginRight: 10,
+    },
+    input: {
+        flex: 1,
+        fontSize: 16,
+        color: '#333333',
     },
     link: {
-        fontSize: 18,
+        fontSize: 20,
         color: "blue",
         textDecorationLine: "underline",
+    },
+    buttonBuscar: {
+        backgroundColor: '#E64A19', // Tu color naranja con un tono ligeramente más vivo
+        borderRadius: 12,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 24,
+    },
+    buttonText: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: '600', // Tipografía semi-bold se ve mejor que mayúsculas fijas
     },
 });
