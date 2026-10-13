@@ -13,6 +13,7 @@ export default function TuTiendaLayout() {
                 <Stack.Screen name="recuperar" options={{ headerShown: false }} />
                 <Stack.Screen name="activa" options={{ headerShown: false }} />
                 <Stack.Screen name="activareenviar" options={{ headerShown: false }} />
+                <Stack.Screen name="cambiar" options={{ headerShown: false }} />
                 <Stack.Screen name="latienda" options={{ headerShown: false }} />
             </Stack>
         </SessionProvider>
